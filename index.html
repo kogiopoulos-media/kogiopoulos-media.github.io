@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kogiopoulos Media</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --black: #0a0a0a; --charcoal: #141414; --warm-dark: #1a1714; --gold: #c9a84c; --gold-light: #e2c97e; --cream: #f5f0e8; --muted: #7a7060; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--black); color: var(--cream); font-family: 'Jost', sans-serif; font-weight: 300; overflow-x: hidden; cursor: none; }
+    .cursor { position: fixed; width: 8px; height: 8px; background: var(--gold); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); }
+    .cursor-ring { position: fixed; width: 36px; height: 36px; border: 1px solid rgba(201,168,76,0.5); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: all 0.15s ease; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 2rem 4rem; transition: background 0.4s; }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 300; letter-spacing: 0.2em; color: var(--cream); text-decoration: none; }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 3rem; list-style: none; }
+    .nav-links a { font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.3s; cursor: none; }
+    .nav-links a:hover { color: var(--gold); }
+    .hero { position: relative; height: 100vh; display: flex; align-items: flex-end; padding: 0 4rem 5rem; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; background: linear-gradient(to right, rgba(10,10,10,0.88) 40%, rgba(10,10,10,0.25) 100%), url('DSC03549.jpg') center/cover no-repeat; animation: slowZoom 20s ease-in-out infinite alternate; }
+    @keyframes slowZoom { from { transform: scale(1.05); } to { transform: scale(1.12); } }
+    .hero-content { position: relative; z-index: 2; max-width: 700px; }
+    .hero-eyebrow { font-size: 0.65rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 1s 0.3s forwards; }
+    .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(3.5rem, 7vw, 6.5rem); font-weight: 300; line-height: 1.05; margin-bottom: 2rem; opacity: 0; animation: fadeUp 1s 0.5s forwards; }
+    .hero-title em { font-style: italic; color: var(--gold-light); }
+    .hero-sub { font-size: 0.85rem; letter-spacing: 0.1em; color: var(--muted); line-height: 1.8; max-width: 400px; margin-bottom: 3rem; opacity: 0; animation: fadeUp 1s 0.7s forwards; }
+    .hero-cta { display: inline-flex; align-items: center; gap: 1rem; font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--cream); text-decoration: none; border-bottom: 1px solid var(--gold); padding-bottom: 0.5rem; opacity: 0; animation: fadeUp 1s 0.9s forwards; transition: color 0.3s, gap 0.3s; cursor: none; }
+    .hero-cta:hover { color: var(--gold); gap: 1.5rem; }
+    .hero-cta::after { content: '→'; }
+    .hero-scroll { position: absolute; right: 4rem; bottom: 5rem; writing-mode: vertical-rl; font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 1rem; opacity: 0; animation: fadeIn 1.5s 1.2s forwards; }
+    .hero-scroll::before { content: ''; display: block; width: 1px; height: 60px; background: linear-gradient(to bottom, var(--gold), transparent); }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    section { padding: 8rem 4rem; }
+    .section-label { font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 300; line-height: 1.1; margin-bottom: 1.5rem; }
+    .portfolio { background: var(--black); }
+    .portfolio-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4rem; }
+    .portfolio-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.5rem; }
+    .p-item { overflow: hidden; position: relative; cursor: none; }
+    .p-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.4s; filter: brightness(0.85) saturate(0.9); }
+    .p-item:hover img { transform: scale(1.05); filter: brightness(1) saturate(1.1); }
+    .p-item-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,10,10,0.75) 0%, transparent 55%); opacity: 0; transition: opacity 0.4s; display: flex; align-items: flex-end; padding: 1.5rem; }
+    .p-item:hover .p-item-overlay { opacity: 1; }
+    .p-item-label { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--cream); }
+    .p-item-zoom { position: absolute; top: 1rem; right: 1rem; width: 32px; height: 32px; border: 1px solid rgba(201,168,76,0.6); border-radius: 50%; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; }
+    .p-item:hover .p-item-zoom { opacity: 1; }
+    .p-item-zoom svg { width: 14px; height: 14px; stroke: var(--gold); fill: none; }
+    .p-item:nth-child(1) { grid-column: 1/5; aspect-ratio: 3/4; }
+    .p-item:nth-child(2) { grid-column: 5/9; aspect-ratio: 3/4; }
+    .p-item:nth-child(3) { grid-column: 9/13; aspect-ratio: 3/4; }
+    .p-item:nth-child(4) { grid-column: 1/5; aspect-ratio: 3/4; }
+    .p-item:nth-child(5) { grid-column: 5/9; aspect-ratio: 3/4; }
+    .p-item:nth-child(6) { grid-column: 9/13; aspect-ratio: 3/4; }
+    .lightbox { position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s; }
+    .lightbox.open { opacity: 1; pointer-events: all; }
+    .lightbox-backdrop { position: absolute; inset: 0; background: rgba(10,10,10,0.96); }
+    .lightbox-img-wrap { position: relative; z-index: 1; }
+    .lightbox-img-wrap img { max-width: 88vw; max-height: 85vh; object-fit: contain; display: block; transform: scale(0.92); transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94); }
+    .lightbox.open .lightbox-img-wrap img { transform: scale(1); }
+    .lightbox-close { position: absolute; top: 2rem; right: 2rem; z-index: 2; width: 48px; height: 48px; border: 1px solid rgba(201,168,76,0.4); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: none; transition: border-color 0.3s, background 0.3s; }
+    .lightbox-close:hover { border-color: var(--gold); background: rgba(201,168,76,0.1); }
+    .lightbox-close svg { width: 16px; height: 16px; stroke: var(--cream); fill: none; }
+    .lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); z-index: 2; width: 52px; height: 52px; border: 1px solid rgba(201,168,76,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: none; transition: border-color 0.3s, background 0.3s; }
+    .lightbox-nav:hover { border-color: var(--gold); background: rgba(201,168,76,0.1); }
+    .lightbox-nav svg { width: 18px; height: 18px; stroke: var(--cream); fill: none; }
+    .lightbox-prev { left: 2rem; } .lightbox-next { right: 2rem; }
+    .lightbox-caption { position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%); font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+    .lightbox-counter { position: absolute; top: 2rem; left: 50%; transform: translateX(-50%); font-size: 0.65rem; letter-spacing: 0.2em; color: var(--muted); }
+    .about { background: var(--warm-dark); display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+    .about-image-wrap { position: relative; }
+    .about-image { width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block; }
+    .about-image-accent { position: absolute; bottom: -2rem; right: -2rem; width: 60%; aspect-ratio: 1; border: 1px solid var(--gold); opacity: 0.3; pointer-events: none; }
+    .about-stat-row { display: flex; gap: 3rem; margin-top: 3rem; padding-top: 3rem; border-top: 1px solid rgba(201,168,76,0.15); }
+    .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300; color: var(--gold); line-height: 1; }
+    .stat-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-top: 0.4rem; }
+    .about-text { font-size: 1rem; line-height: 1.9; color: rgba(245,240,232,0.7); margin-bottom: 1.5rem; }
+    .services { background: var(--charcoal); }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; margin-top: 4rem; }
+    .service-card { padding: 3rem; border: 1px solid rgba(201,168,76,0.1); position: relative; transition: border-color 0.4s, transform 0.4s; text-decoration: none; display: block; cursor: none; overflow: hidden; }
+    .service-card-thumb { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; margin-bottom: 2rem; filter: brightness(0.75) saturate(0.85); transition: filter 0.4s, transform 0.5s; }
+    .service-card:hover .service-card-thumb { filter: brightness(0.95) saturate(1); transform: scale(1.02); }
+    .service-card:hover { border-color: rgba(201,168,76,0.5); transform: translateY(-6px); }
+    .service-num { font-family: 'Cormorant Garamond', serif; font-size: 4rem; font-weight: 300; color: rgba(201,168,76,0.12); line-height: 1; margin-bottom: 1.5rem; }
+    .service-title { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 400; margin-bottom: 1rem; color: var(--cream); }
+    .service-desc { font-size: 0.85rem; line-height: 1.8; color: var(--muted); }
+    .service-line { width: 30px; height: 1px; background: var(--gold); margin-bottom: 1.5rem; }
+    .service-arrow { position: absolute; bottom: 2rem; right: 2rem; font-size: 0.7rem; letter-spacing: 0.2em; color: var(--gold); opacity: 0; transition: opacity 0.3s, right 0.3s; }
+    .service-card:hover .service-arrow { opacity: 1; right: 1.5rem; }
+    .contact { background: var(--warm-dark); display: grid; grid-template-columns: 1fr 1fr; gap: 8rem; align-items: start; }
+    .contact-intro { font-size: 1rem; line-height: 1.9; color: rgba(245,240,232,0.6); margin-bottom: 3rem; }
+    .contact-detail { display: flex; flex-direction: column; gap: 1.5rem; }
+    .contact-item { display: flex; flex-direction: column; gap: 0.3rem; }
+    .contact-item-label { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); }
+    .contact-item-val { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--cream); }
+    .form-group { margin-bottom: 2rem; }
+    .form-label { display: block; font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.8rem; }
+    .form-input, .form-textarea { width: 100%; background: transparent; border: none; border-bottom: 1px solid rgba(201,168,76,0.2); color: var(--cream); font-family: 'Jost', sans-serif; font-size: 0.95rem; padding: 0.8rem 0; outline: none; transition: border-color 0.3s; }
+    .form-input:focus, .form-textarea:focus { border-color: var(--gold); }
+    .form-textarea { resize: none; height: 120px; }
+    .form-submit { background: transparent; border: 1px solid var(--gold); color: var(--gold); font-family: 'Jost', sans-serif; font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; padding: 1.2rem 3rem; cursor: none; transition: background 0.3s, color 0.3s; }
+    .form-submit:hover { background: var(--gold); color: var(--black); }
+    footer { background: var(--black); padding: 3rem 4rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(201,168,76,0.08); }
+    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; letter-spacing: 0.15em; color: var(--cream); }
+    .footer-copy { font-size: 0.65rem; letter-spacing: 0.15em; color: var(--muted); }
+    .footer-social { display: flex; gap: 2rem; }
+    .footer-social a { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.3s; cursor: none; }
+    .footer-social a:hover { color: var(--gold); }
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.9s ease, transform 0.9s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    @media (max-width: 900px) {
+      nav { padding: 1.5rem 2rem; } .nav-links { display: none; }
+      section { padding: 5rem 2rem; } .hero { padding: 0 2rem 4rem; } .hero-scroll { display: none; }
+      .about, .contact { grid-template-columns: 1fr; gap: 3rem; } .services-grid { grid-template-columns: 1fr; }
+      .portfolio-grid { grid-template-columns: 1fr 1fr; } .p-item { grid-column: auto !important; aspect-ratio: 1 !important; }
+      footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo">K<span>·</span>MEDIA</a>
+    <ul class="nav-links">
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Visual Storytelling &nbsp;·&nbsp; Perth, AU</p>
+      <h1 class="hero-title">Every frame<br>tells a <em>story</em><br>worth keeping.</h1>
+      <p class="hero-sub">Kogiopoulos Media captures moments with intention — turning the fleeting into the timeless.</p>
+      <a href="#portfolio" class="hero-cta">View the work</a>
+    </div>
+    <div class="hero-scroll">Scroll</div>
+  </section>
+
+  <section class="portfolio" id="portfolio">
+    <div class="portfolio-header reveal">
+      <div><p class="section-label">Selected Work</p><h2 class="section-title">The Portfolio</h2></div>
+      <a href="#contact" class="hero-cta" style="opacity:1;animation:none;">Commission a project</a>
+    </div>
+    <div class="portfolio-grid reveal">
+      <div class="p-item" data-index="0" data-label="Commercial · Streak Free"><img src="DSC03484.jpg" alt="Glass facade" loading="lazy"/><div class="p-item-overlay"><span class="p-item-label">Commercial</span></div><div class="p-item-zoom"><svg viewBox="0 0 24 24" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div></div>
+      <div class="p-item" data-index="1" data-label="Commercial · Streak Free"><img src="DSC03549.jpg" alt="Pool reflection" loading="lazy"/><div class="p-item-overlay"><span class="p-item-label">Commercial</span></div><div class="p-item-zoom"><svg viewBox="0 0 24 24" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div></div>
+      <div class="p-item" data-index="2" data-label="Events · Solstice"><img src="Solstice-05.jpg" alt="Solstice guitarist" loading="lazy"/><div class="p-item-overlay"><span class="p-item-label">Events</span></div><div class="p-item-zoom"><svg viewBox="0 0 24 24" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div></div>
+      <div class="p-item" data-index="3" data-label="Commercial · Streak Free"><img src="DSC03617.jpg" alt="Through-glass portrait" loading="lazy"/><div class="p-item-overlay"><span class="p-item-label">Commercial</span></div><div class="p-item-zoom"><svg viewBox="0 0 24 24" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div></div>
+      <div class="p-item" data-index="4" data-label="Events · Solstice"><img src="Solstice-01.jpg" alt="Solstice bass" loading="lazy"/><div class="p-item-overlay"><span class="p-item-label">Events</span></div><div class="p-item-zoom"><svg viewBox="0 0 24 24" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div></div>
+      <div class="p-item" data-index="5" data-label="Commercial · Streak Free"><img src="DSC03990.jpg" alt="Foliage framed" loading="lazy"/><div class="p-item-overlay"><span class="p-item-label">Commercial</span></div><div class="p-item-zoom"><svg viewBox="0 0 24 24" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div></div>
+    </div>
+  </section>
+
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-backdrop" id="lbBackdrop"></div>
+    <div class="lightbox-counter" id="lbCounter"></div>
+    <div class="lightbox-img-wrap"><img src="" alt="" id="lbImg"/></div>
+    <div class="lightbox-caption" id="lbCaption"></div>
+    <div class="lightbox-close" id="lbClose"><svg viewBox="0 0 24 24" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+    <div class="lightbox-nav lightbox-prev" id="lbPrev"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="15 18 9 12 15 6"/></svg></div>
+    <div class="lightbox-nav lightbox-next" id="lbNext"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="9 18 15 12 9 6"/></svg></div>
+  </div>
+
+  <section class="about" id="about">
+    <div class="about-image-wrap reveal"><img class="about-image" src="DSC02934.jpg" alt="Photographer at work"/><div class="about-image-accent"></div></div>
+    <div class="reveal">
+      <p class="section-label">The Artist</p>
+      <h2 class="section-title">Light, shadow,<br>and <em style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold-light)">intention.</em></h2>
+      <p class="about-text">Kogiopoulos Media is a visual storytelling studio built on the belief that great photography isn't taken — it's crafted. From commercial campaigns to live events, every image is approached with care, precision, and an eye for the extraordinary in the everyday.</p>
+      <p class="about-text">Based in Perth, Australia, we work with brands and creatives who understand the power of a compelling image.</p>
+      <div class="about-stat-row">
+        <div><div class="stat-num">3+</div><div class="stat-label">Years of craft</div></div>
+        <div><div class="stat-num">100+</div><div class="stat-label">Projects delivered</div></div>
+        <div><div class="stat-num">3</div><div class="stat-label">Continents covered</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="services" id="services">
+    <div class="reveal"><p class="section-label">What We Offer</p><h2 class="section-title">Services</h2></div>
+    <div class="services-grid">
+      <a href="portrait.html" class="service-card reveal"><img class="service-card-thumb" src="DSC03617.jpg" alt="Portrait"/><div class="service-num">01</div><div class="service-line"></div><h3 class="service-title">Portrait & Editorial</h3><p class="service-desc">Compelling portraiture for individuals, creatives, and publications. We bring out the authentic character behind every face.</p><span class="service-arrow">Explore →</span></a>
+      <a href="wedding.html" class="service-card reveal"><img class="service-card-thumb" src="Solstice-05.jpg" alt="Events"/><div class="service-num">02</div><div class="service-line"></div><h3 class="service-title">Events & Occasions</h3><p class="service-desc">Live music, corporate events, festivals, and more — we capture the energy of every occasion with precision and heart.</p><span class="service-arrow">Explore →</span></a>
+      <a href="commercial.html" class="service-card reveal"><img class="service-card-thumb" src="DSC03990.jpg" alt="Commercial"/><div class="service-num">03</div><div class="service-line"></div><h3 class="service-title">Commercial & Brand</h3><p class="service-desc">Photography that sells. Strategic, striking imagery crafted to elevate your brand identity and stop the scroll.</p><span class="service-arrow">Explore →</span></a>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="reveal">
+      <p class="section-label">Get in Touch</p>
+      <h2 class="section-title">Let's create<br>something<br><em style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold-light)">unforgettable.</em></h2>
+      <p class="contact-intro">Ready to work together? We'd love to hear about your project. Reach out and we'll respond within 24 hours.</p>
+      <div class="contact-detail">
+        <div class="contact-item"><span class="contact-item-label">Email</span><span class="contact-item-val">hello@kogiopoulosmedia.com</span></div>
+        <div class="contact-item"><span class="contact-item-label">Based in</span><span class="contact-item-val">Perth, Western Australia</span></div>
+        <div class="contact-item"><span class="contact-item-label">Instagram</span><span class="contact-item-val">@kogiopoulosmedia</span></div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="form-group"><label class="form-label">Your Name</label><input type="text" class="form-input" placeholder="Jane Smith"/></div>
+      <div class="form-group"><label class="form-label">Email Address</label><input type="email" class="form-input" placeholder="jane@email.com"/></div>
+      <div class="form-group"><label class="form-label">Project Type</label><input type="text" class="form-input" placeholder="Event / Portrait / Commercial..."/></div>
+      <div class="form-group"><label class="form-label">Tell us about your vision</label><textarea class="form-textarea" placeholder="Share the story you want to tell..."></textarea></div>
+      <button class="form-submit">Send Enquiry</button>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">KOGIOPOULOS MEDIA</div>
+    <div class="footer-copy">© 2026 · All rights reserved</div>
+    <div class="footer-social"><a href="#">Instagram</a><a href="#">LinkedIn</a><a href="#">Behance</a></div>
+  </footer>
+
+  <script>
+    const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+    let mx=0,my=0,rx=0,ry=0;
+    document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
+    (function a(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(a);})();
+    document.querySelectorAll('a,button,.p-item,.lightbox-nav,.lightbox-close').forEach(el=>{
+      el.addEventListener('mouseenter',()=>{ring.style.transform='translate(-50%,-50%) scale(1.8)';ring.style.borderColor='rgba(201,168,76,0.8)';});
+      el.addEventListener('mouseleave',()=>{ring.style.transform='translate(-50%,-50%) scale(1)';ring.style.borderColor='rgba(201,168,76,0.5)';});
+    });
+    window.addEventListener('scroll',()=>{document.getElementById('navbar').style.background=window.scrollY>80?'rgba(10,10,10,0.97)':'linear-gradient(to bottom,rgba(10,10,10,0.95),transparent)';});
+    const io=new IntersectionObserver((e)=>{e.forEach((r,i)=>{if(r.isIntersecting){setTimeout(()=>r.target.classList.add('visible'),i*80);}});},{threshold:0.1});
+    document.querySelectorAll('.reveal').forEach(r=>io.observe(r));
+    const photos=[
+      {src:'DSC03484.jpg',label:'Commercial · Streak Free'},{src:'DSC03549.jpg',label:'Commercial · Streak Free'},
+      {src:'Solstice-05.jpg',label:'Events · Solstice'},{src:'DSC03617.jpg',label:'Commercial · Streak Free'},
+      {src:'Solstice-01.jpg',label:'Events · Solstice'},{src:'DSC03990.jpg',label:'Commercial · Streak Free'},
+    ];
+    let current=0;
+    const lb=document.getElementById('lightbox'),lbImg=document.getElementById('lbImg'),lbCaption=document.getElementById('lbCaption'),lbCounter=document.getElementById('lbCounter');
+    function openLightbox(idx){current=idx;lbImg.src=photos[idx].src;lbCaption.textContent=photos[idx].label;lbCounter.textContent=(idx+1)+' / '+photos.length;lb.classList.add('open');document.body.style.overflow='hidden';}
+    function closeLightbox(){lb.classList.remove('open');document.body.style.overflow='';}
+    function showNext(){current=(current+1)%photos.length;openLightbox(current);}
+    function showPrev(){current=(current-1+photos.length)%photos.length;openLightbox(current);}
+    document.querySelectorAll('.p-item').forEach(item=>{item.addEventListener('click',()=>openLightbox(parseInt(item.dataset.index)));});
+    document.getElementById('lbClose').addEventListener('click',closeLightbox);
+    document.getElementById('lbBackdrop').addEventListener('click',closeLightbox);
+    document.getElementById('lbNext').addEventListener('click',e=>{e.stopPropagation();showNext();});
+    document.getElementById('lbPrev').addEventListener('click',e=>{e.stopPropagation();showPrev();});
+    document.addEventListener('keydown',e=>{if(!lb.classList.contains('open'))return;if(e.key==='Escape')closeLightbox();if(e.key==='ArrowRight')showNext();if(e.key==='ArrowLeft')showPrev();});
+  </script>
+</body>
+</html>

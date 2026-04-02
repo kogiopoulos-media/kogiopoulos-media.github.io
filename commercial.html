@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Commercial & Brand — Kogiopoulos Media</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #0a0a0a; --charcoal: #141414; --warm-dark: #1a1714;
+      --gold: #c9a84c; --gold-light: #e2c97e; --cream: #f5f0e8;
+      --muted: #7a7060;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--black); color: var(--cream); font-family: 'Jost', sans-serif; font-weight: 300; overflow-x: hidden; cursor: none; }
+
+    .cursor { position: fixed; width: 8px; height: 8px; background: var(--gold); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); }
+    .cursor-ring { position: fixed; width: 36px; height: 36px; border: 1px solid rgba(201,168,76,0.5); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: all 0.15s ease; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 2rem 4rem; background: rgba(10,10,10,0.97); border-bottom: 1px solid rgba(201,168,76,0.08); }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 300; letter-spacing: 0.2em; color: var(--cream); text-decoration: none; }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 3rem; list-style: none; }
+    .nav-links a { font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.3s; cursor: none; }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+    .nav-back { font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; transition: color 0.3s; cursor: none; }
+    .nav-back:hover { color: var(--gold); }
+
+    /* HERO - bold typographic */
+    .hero { padding-top: 80px; min-height: 100vh; background: var(--charcoal); display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 5rem; padding-left: 4rem; padding-right: 4rem; position: relative; overflow: hidden; }
+    .hero-bg-img { position: absolute; inset: 0; opacity: 0.2; background: url('DSC03484.jpg') center/cover no-repeat; }
+    .hero-bg-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px); background-size: 80px 80px; }
+    .hero-label { position: relative; font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 2rem; opacity: 0; animation: fadeUp 0.8s 0.2s forwards; }
+    .hero-title { position: relative; font-family: 'Cormorant Garamond', serif; font-size: clamp(4rem, 9vw, 9rem); font-weight: 300; line-height: 0.95; letter-spacing: -0.02em; margin-bottom: 3rem; opacity: 0; animation: fadeUp 0.8s 0.4s forwards; }
+    .hero-title em { font-style: italic; color: var(--gold-light); display: block; }
+    .hero-bottom { position: relative; display: flex; justify-content: space-between; align-items: flex-end; opacity: 0; animation: fadeUp 0.8s 0.6s forwards; }
+    .hero-sub { font-size: 0.9rem; color: var(--muted); line-height: 1.8; max-width: 400px; }
+    .hero-stat { text-align: right; }
+    .hero-stat-num { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 300; color: var(--gold); line-height: 1; }
+    .hero-stat-label { font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(25px); } to { opacity:1; transform:translateY(0); } }
+
+    .section-label { font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 300; line-height: 1.1; }
+
+    /* WHAT WE DO */
+    .what { padding: 8rem 4rem; background: var(--black); }
+    .what-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; margin-top: 4rem; }
+    .what-img { width: 100%; aspect-ratio: 16/10; object-fit: cover; }
+    .what-items { display: flex; flex-direction: column; gap: 2.5rem; }
+    .what-item { padding-left: 1.5rem; border-left: 1px solid rgba(201,168,76,0.2); transition: border-color 0.3s; }
+    .what-item:hover { border-color: var(--gold); }
+    .what-item-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; margin-bottom: 0.5rem; }
+    .what-item-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.75; }
+
+    /* GALLERY */
+    .gallery { padding: 5rem 4rem; background: var(--warm-dark); }
+    .gallery-label { font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 3rem; }
+    .gallery-mosaic { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: auto; gap: 1rem; }
+    .gm-item { overflow: hidden; }
+    .gm-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.7s ease, filter 0.4s; filter: brightness(0.8) saturate(0.85); }
+    .gm-item:hover img { transform: scale(1.05); filter: brightness(1) saturate(1.1); }
+    .gm-item:nth-child(1) { grid-column: 1/3; aspect-ratio: 16/9; }
+    .gm-item:nth-child(2) { grid-column: 3/4; aspect-ratio: 1; }
+    .gm-item:nth-child(3) { grid-column: 4/5; aspect-ratio: 1; }
+    .gm-item:nth-child(4) { grid-column: 1/2; aspect-ratio: 3/4; }
+    .gm-item:nth-child(5) { grid-column: 2/4; aspect-ratio: 16/9; align-self: center; }
+    .gm-item:nth-child(6) { grid-column: 4/5; aspect-ratio: 3/4; }
+
+    /* PACKAGES */
+    .packages { padding: 7rem 4rem; background: var(--black); }
+    .packages-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; margin-bottom: 5rem; }
+    .packages-intro p { font-size: 0.95rem; line-height: 1.9; color: rgba(245,240,232,0.68); }
+    .packages-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+    .pkg-card { padding: 3rem; border: 1px solid rgba(201,168,76,0.1); transition: border-color 0.4s; }
+    .pkg-card:hover { border-color: rgba(201,168,76,0.35); }
+    .pkg-name { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; margin-bottom: 0.4rem; }
+    .pkg-type { font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+    .pkg-price { font-size: 1rem; color: var(--gold-light); margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(201,168,76,0.1); }
+    .pkg-features { list-style: none; display: flex; flex-direction: column; gap: 0.9rem; }
+    .pkg-features li { font-size: 0.85rem; color: var(--muted); display: flex; align-items: center; gap: 0.8rem; }
+    .pkg-features li::before { content: ''; display: block; width: 16px; height: 1px; background: var(--gold); flex-shrink: 0; }
+
+    /* CLIENTS */
+    .clients { padding: 5rem 4rem; background: var(--charcoal); }
+    .clients-label { font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--muted); text-align: center; margin-bottom: 3rem; }
+    .clients-row { display: flex; justify-content: center; align-items: center; gap: 4rem; flex-wrap: wrap; }
+    .client-name { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 300; color: rgba(245,240,232,0.3); letter-spacing: 0.1em; transition: color 0.3s; }
+    .client-name:hover { color: var(--cream); }
+
+    /* CTA */
+    .cta { padding: 8rem 4rem; background: var(--warm-dark); position: relative; overflow: hidden; }
+    .cta::before { content: ''; position: absolute; right: -200px; top: -200px; width: 600px; height: 600px; border: 1px solid rgba(201,168,76,0.05); border-radius: 50%; }
+    .cta-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+    .cta-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 4vw, 4rem); font-weight: 300; line-height: 1.1; margin-bottom: 1.5rem; }
+    .cta-title em { font-style: italic; color: var(--gold-light); }
+    .cta-sub { font-size: 0.9rem; color: var(--muted); line-height: 1.8; margin-bottom: 2.5rem; }
+    .cta-btn { display: inline-flex; align-items: center; gap: 1rem; font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); text-decoration: none; border: 1px solid var(--gold); padding: 1.2rem 3rem; transition: background 0.3s, color 0.3s; cursor: none; }
+    .cta-btn:hover { background: var(--gold); color: var(--black); }
+    .cta-details { display: flex; flex-direction: column; gap: 2rem; }
+    .cta-detail-item { border-left: 1px solid rgba(201,168,76,0.2); padding-left: 1.5rem; }
+    .cta-detail-label { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; }
+    .cta-detail-val { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--cream); }
+
+    footer { background: var(--black); padding: 3rem 4rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(201,168,76,0.08); }
+    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; letter-spacing: 0.15em; color: var(--cream); }
+    .footer-copy { font-size: 0.65rem; letter-spacing: 0.15em; color: var(--muted); }
+    .footer-social { display: flex; gap: 2rem; }
+    .footer-social a { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.3s; cursor: none; }
+    .footer-social a:hover { color: var(--gold); }
+
+    .reveal { opacity: 0; transform: translateY(35px); transition: opacity 0.9s ease, transform 0.9s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 900px) {
+      nav { padding: 1.5rem 2rem; }
+      .nav-links { display: none; }
+      .hero { padding: 100px 2rem 4rem; }
+      .hero-bottom { flex-direction: column; align-items: flex-start; gap: 2rem; }
+      .hero-stat { text-align: left; }
+      .what { padding: 5rem 2rem; }
+      .what-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .gallery { padding: 4rem 2rem; }
+      .gallery-mosaic { grid-template-columns: 1fr 1fr; }
+      .gm-item { grid-column: auto !important; aspect-ratio: 1 !important; }
+      .packages { padding: 5rem 2rem; }
+      .packages-intro { grid-template-columns: 1fr; gap: 2rem; }
+      .packages-grid { grid-template-columns: 1fr; }
+      .clients { padding: 4rem 2rem; }
+      .cta { padding: 5rem 2rem; }
+      .cta-inner { grid-template-columns: 1fr; gap: 3rem; }
+      footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <nav>
+    <a href="index.html" class="nav-logo">K<span>·</span>MEDIA</a>
+    <ul class="nav-links">
+      <li><a href="index.html#portfolio">Portfolio</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#services" class="active">Services</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <a href="index.html" class="nav-back">← Back to home</a>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-bg-img"></div>
+    <div class="hero-bg-grid"></div>
+    <p class="hero-label">Services / Commercial & Brand</p>
+    <h1 class="hero-title">Images that<br><em>move markets.</em></h1>
+    <div class="hero-bottom">
+      <p class="hero-sub">Strategic commercial photography built to elevate your brand, convert customers, and create an identity that endures.</p>
+      <div class="hero-stat">
+        <div class="hero-stat-num">150+</div>
+        <div class="hero-stat-label">Brand campaigns delivered</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="what">
+    <div class="reveal">
+      <p class="section-label">What We Offer</p>
+      <h2 class="section-title">Commercial photography<br>for brands that mean business.</h2>
+    </div>
+    <div class="what-grid">
+      <div class="reveal">
+        <img class="what-img" src="DSC03549.jpg" alt="Commercial work" />
+      </div>
+      <div class="what-items reveal">
+        <div class="what-item">
+          <div class="what-item-title">Product Photography</div>
+          <p class="what-item-desc">Clean, elegant, conversion-focused. Product imagery that tells the story of quality before a single word is read.</p>
+        </div>
+        <div class="what-item">
+          <div class="what-item-title">Brand & Campaign</div>
+          <p class="what-item-desc">Full campaign shoots that define an aesthetic and communicate your brand's values across every touchpoint.</p>
+        </div>
+        <div class="what-item">
+          <div class="what-item-title">Corporate & Team</div>
+          <p class="what-item-desc">Executive portraits and team photography that convey trust, capability, and genuine personality.</p>
+        </div>
+        <div class="what-item">
+          <div class="what-item-title">Hospitality & Food</div>
+          <p class="what-item-desc">Restaurants, hotels, and food brands — we make spaces and dishes look as good as they taste.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery">
+    <p class="gallery-label reveal">Commercial Work</p>
+    <div class="gallery-mosaic reveal">
+      <div class="gm-item"><img src="DSC03484.jpg" alt="Commercial 1" loading="lazy"/></div>
+      <div class="gm-item"><img src="DSC03617.jpg" alt="Commercial 2" loading="lazy"/></div>
+      <div class="gm-item"><img src="DSC03023.jpg" alt="Commercial 3" loading="lazy"/></div>
+      <div class="gm-item"><img src="DSC02934.jpg" alt="Commercial 4" loading="lazy"/></div>
+      <div class="gm-item"><img src="DSC03990.jpg" alt="Commercial 5" loading="lazy"/></div>
+      <div class="gm-item"><img src="Solstice-29.jpg" alt="Commercial 6" loading="lazy"/></div>
+    </div>
+  </section>
+
+  <section class="packages">
+    <div class="packages-intro reveal">
+      <div>
+        <p class="section-label">Investment</p>
+        <h2 class="section-title">Commercial Packages</h2>
+      </div>
+      <p>Every commercial project is scoped individually, but these packages give you a strong starting point. All packages include usage licensing and post-production. Custom quotes available for larger campaigns.</p>
+    </div>
+    <div class="packages-grid">
+      <div class="pkg-card reveal">
+        <div class="pkg-name">Product Shoot</div>
+        <div class="pkg-type">E-commerce & Catalogue</div>
+        <div class="pkg-price">From $800 per half-day</div>
+        <ul class="pkg-features">
+          <li>Up to 10 hero product shots</li>
+          <li>Studio or location</li>
+          <li>Full retouching included</li>
+          <li>Web + print licence</li>
+          <li>48hr turnaround available</li>
+        </ul>
+      </div>
+      <div class="pkg-card reveal">
+        <div class="pkg-name">Brand Campaign</div>
+        <div class="pkg-type">Marketing & Social</div>
+        <div class="pkg-price">From $2,400 per day</div>
+        <ul class="pkg-features">
+          <li>Full day shoot</li>
+          <li>Creative direction support</li>
+          <li>50+ campaign-ready images</li>
+          <li>Multi-channel licence</li>
+          <li>Mood board + pre-production</li>
+        </ul>
+      </div>
+      <div class="pkg-card reveal">
+        <div class="pkg-name">Corporate Portraits</div>
+        <div class="pkg-type">Executive & Team</div>
+        <div class="pkg-price">From $300 per person</div>
+        <ul class="pkg-features">
+          <li>Individual or group sessions</li>
+          <li>Studio or on-location</li>
+          <li>Brand-consistent editing style</li>
+          <li>Website + LinkedIn use</li>
+          <li>Bulk pricing available</li>
+        </ul>
+      </div>
+      <div class="pkg-card reveal">
+        <div class="pkg-name">Retainer</div>
+        <div class="pkg-type">Ongoing Partnership</div>
+        <div class="pkg-price">From $1,500 / month</div>
+        <ul class="pkg-features">
+          <li>2 shoot days per month</li>
+          <li>Priority scheduling</li>
+          <li>Dedicated editing style</li>
+          <li>Unlimited usage licence</li>
+          <li>Strategy & content planning</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="clients">
+    <p class="clients-label">Trusted by brands across Australia & Europe</p>
+    <div class="clients-row">
+      <div class="client-name">Maison Éclat</div>
+      <div class="client-name">Karvela Group</div>
+      <div class="client-name">Saltwater Co.</div>
+      <div class="client-name">Atheneum Hotels</div>
+      <div class="client-name">Oleander Studio</div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="cta-inner">
+      <div class="reveal">
+        <h2 class="cta-title">Let's build your<br><em>visual identity.</em></h2>
+        <p class="cta-sub">Whether you're launching a new brand or refreshing an existing one, we'll create imagery that does the talking for you.</p>
+        <a href="index.html#contact" class="cta-btn">Start a project →</a>
+      </div>
+      <div class="cta-details reveal">
+        <div class="cta-detail-item">
+          <div class="cta-detail-label">Response time</div>
+          <div class="cta-detail-val">Within 24 hours</div>
+        </div>
+        <div class="cta-detail-item">
+          <div class="cta-detail-label">Based in</div>
+          <div class="cta-detail-val">Perth, AU & Athens, GR</div>
+        </div>
+        <div class="cta-detail-item">
+          <div class="cta-detail-label">Available for travel</div>
+          <div class="cta-detail-val">Worldwide</div>
+        </div>
+        <div class="cta-detail-item">
+          <div class="cta-detail-label">Email</div>
+          <div class="cta-detail-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="79111c1515163912161e101609160c15160a141c1d1018571a1614">[email&#160;protected]</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">KOGIOPOULOS MEDIA</div>
+    <div class="footer-copy">© 2026 · All rights reserved</div>
+    <div class="footer-social"><a href="#">Instagram</a><a href="#">LinkedIn</a><a href="#">Behance</a></div>
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+    let mx=0,my=0,rx=0,ry=0;
+    document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
+    (function a(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(a);})();
+    document.querySelectorAll('a,button').forEach(el=>{
+      el.addEventListener('mouseenter',()=>{ring.style.transform='translate(-50%,-50%) scale(1.8)';ring.style.borderColor='rgba(201,168,76,0.8)';});
+      el.addEventListener('mouseleave',()=>{ring.style.transform='translate(-50%,-50%) scale(1)';ring.style.borderColor='rgba(201,168,76,0.5)';});
+    });
+    const io=new IntersectionObse

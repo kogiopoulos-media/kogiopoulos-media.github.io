@@ -197,22 +197,90 @@
   <section class="contact" id="contact">
     <div class="reveal">
       <p class="section-label">Get in Touch</p>
-      <h2 class="section-title">Let's create<br>something<br><em style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold-light)">unforgettable.</em></h2>
-      <p class="contact-intro">Ready to work together? We'd love to hear about your project. Reach out and we'll respond within 24 hours.</p>
+      <h2 class="section-title">Let's create<br>something<br>
+        <em style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold-light)">unforgettable.</em>
+      </h2>
+      <p class="contact-intro">
+        Ready to work together? We'd love to hear about your project. Reach out and we'll respond within 24 hours.
+      </p>
+
       <div class="contact-detail">
-        <div class="contact-item"><span class="contact-item-label">Email</span><span class="contact-item-val">hello@kogiopoulosmedia.com</span></div>
-        <div class="contact-item"><span class="contact-item-label">Based in</span><span class="contact-item-val">Perth, Western Australia</span></div>
-        <div class="contact-item"><span class="contact-item-label">Instagram</span><span class="contact-item-val">@kogiopoulosmedia</span></div>
+        <div class="contact-item">
+          <span class="contact-item-label">Email</span>
+          <span class="contact-item-val">hello@kogiopoulosmedia.com</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-item-label">Based in</span>
+          <span class="contact-item-val">Perth, Western Australia</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-item-label">Instagram</span>
+          <span class="contact-item-val">@kogiopoulosmedia</span>
+        </div>
       </div>
     </div>
-    <div class="reveal">
-      <div class="form-group"><label class="form-label">Your Name</label><input type="text" class="form-input" placeholder="Jane Smith"/></div>
-      <div class="form-group"><label class="form-label">Email Address</label><input type="email" class="form-input" placeholder="jane@email.com"/></div>
-      <div class="form-group"><label class="form-label">Project Type</label><input type="text" class="form-input" placeholder="Event / Portrait / Commercial..."/></div>
-      <div class="form-group"><label class="form-label">Tell us about your vision</label><textarea class="form-textarea" placeholder="Share the story you want to tell..."></textarea></div>
-      <button class="form-submit">Send Enquiry</button>
-    </div>
+
+    <!-- FORM -->
+    <form id="contact-form" class="reveal">
+      <div class="form-group">
+        <label class="form-label">Your Name</label>
+        <input type="text" id="name" class="form-input" placeholder="Jane Smith" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <input type="email" id="email" class="form-input" placeholder="jane@email.com" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Project Type</label>
+        <input type="text" id="project" class="form-input" placeholder="Event / Portrait / Commercial..." required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Tell us about your vision</label>
+        <textarea id="message" class="form-textarea" placeholder="Share the story you want to tell..." required></textarea>
+      </div>
+
+      <button type="submit" class="form-submit">Send Enquiry</button>
+    </form>
   </section>
+
+  <!-- EMAILJS -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+  <script>
+  (function() {
+    emailjs.init("1VapVgh1YuLior9Mg"); // replace
+  })();
+
+  document.getElementById("contact-form").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const button = document.querySelector(".form-submit");
+    button.innerText = "Sending...";
+    button.disabled = true;
+
+    emailjs.send("service_xf9c9b6", "template_xqyzb2f", {
+      name: document.getElementById("name").value,
+      email: document.getElementById("email").value,
+      project: document.getElementById("project").value,
+      message: document.getElementById("message").value
+    })
+    .then(function() {
+      alert("Enquiry sent successfully!");
+      document.getElementById("contact-form").reset();
+      button.innerText = "Send Enquiry";
+      button.disabled = false;
+    })
+    .catch(function(error) {
+      alert("Failed to send enquiry.");
+      console.error(error);
+      button.innerText = "Send Enquiry";
+      button.disabled = false;
+    });
+  });
+  </script>
 
   <footer>
     <div class="footer-logo">KOGIOPOULOS MEDIA</div>

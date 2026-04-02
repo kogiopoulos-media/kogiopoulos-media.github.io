@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hosting Instructions — Kogiopoulos Media</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0a0a0a; color: #f5f0e8; font-family: 'Jost', sans-serif; font-weight: 300; line-height: 1.7; padding: 4rem; max-width: 860px; margin: 0 auto; }
+    h1 { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300; color: #e2c97e; margin-bottom: 0.5rem; }
+    .subtitle { font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase; color: #7a7060; margin-bottom: 4rem; }
+    h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 300; color: #c9a84c; margin: 3rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(201,168,76,0.2); }
+    h3 { font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: #c9a84c; margin: 2rem 0 0.8rem; }
+    p { color: rgba(245,240,232,0.75); margin-bottom: 1rem; font-size: 0.95rem; }
+    ol, ul { padding-left: 1.5rem; color: rgba(245,240,232,0.75); font-size: 0.95rem; }
+    li { margin-bottom: 0.6rem; }
+    code { background: #1a1714; color: #e2c97e; padding: 0.2rem 0.6rem; border-radius: 2px; font-size: 0.85rem; font-family: 'Courier New', monospace; }
+    .step-block { background: #141414; border: 1px solid rgba(201,168,76,0.12); padding: 2rem; margin: 1.5rem 0; position: relative; }
+    .step-num { position: absolute; top: -1px; left: -1px; background: #c9a84c; color: #0a0a0a; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.3rem 0.8rem; font-weight: 500; }
+    .step-block h3 { margin-top: 1rem; color: #f5f0e8; letter-spacing: 0.1em; font-size: 0.85rem; }
+    .tip { background: rgba(201,168,76,0.06); border-left: 2px solid #c9a84c; padding: 1rem 1.5rem; margin: 1.5rem 0; font-size: 0.88rem; color: rgba(245,240,232,0.7); }
+    .file-tree { background: #141414; padding: 1.5rem 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #e2c97e; line-height: 2; margin: 1rem 0; }
+    .file-tree .dim { color: #7a7060; }
+    a { color: #c9a84c; }
+    hr { border: none; border-top: 1px solid rgba(201,168,76,0.1); margin: 3rem 0; }
+    .url-example { background: #1a1714; border: 1px solid rgba(201,168,76,0.2); padding: 1rem 1.5rem; font-family: 'Courier New', monospace; color: #e2c97e; font-size: 0.9rem; margin: 1rem 0; text-align: center; letter-spacing: 0.05em; }
+  </style>
+</head>
+<body>
+
+  <h1>GitHub Pages<br>Hosting Guide</h1>
+  <p class="subtitle">Kogiopoulos Media · Step-by-step instructions</p>
+
+  <p>This guide will walk you through hosting your website for free using GitHub Pages. You will need a free GitHub account — that's all. No coding knowledge required.</p>
+
+  <h2>What's in the zip</h2>
+  <div class="file-tree">
+    index.html <span class="dim">← Homepage</span><br>
+    portrait.html <span class="dim">← Portrait & Editorial page</span><br>
+    wedding.html <span class="dim">← Events & Occasions page</span><br>
+    commercial.html <span class="dim">← Commercial & Brand page</span><br>
+    favicon.ico <span class="dim">← Browser tab icon</span><br>
+    favicon.png <span class="dim">← Browser tab icon (backup)</span><br>
+    apple-touch-icon.png <span class="dim">← iPhone home screen icon</span><br>
+    DSC03484.jpg <span class="dim">↗</span><br>
+    DSC03549.jpg <span class="dim">↗</span><br>
+    Solstice-05.jpg <span class="dim">↗  Your photos</span><br>
+    ... <span class="dim">↗</span>
+  </div>
+
+  <hr>
+
+  <h2>Step-by-step instructions</h2>
+
+  <div class="step-block">
+    <div class="step-num">Step 1</div>
+    <h3>Create a GitHub account</h3>
+    <ol>
+      <li>Go to <a href="https://github.com" target="_blank">github.com</a> and click <strong>Sign up</strong></li>
+      <li>Choose a username — this will appear in your site URL, e.g. <code>kogiopoulosmedia</code></li>
+      <li>Verify your email address</li>
+    </ol>
+  </div>
+
+  <div class="step-block">
+    <div class="step-num">Step 2</div>
+    <h3>Create a new repository</h3>
+    <ol>
+      <li>Once logged in, click the <strong>+</strong> icon in the top right → <strong>New repository</strong></li>
+      <li>Name it exactly: <code>kogiopoulosmedia.github.io</code><br><span style="font-size:0.82rem;color:#7a7060;">(Replace <em>kogiopoulosmedia</em> with your exact GitHub username)</span></li>
+      <li>Set it to <strong>Public</strong></li>
+      <li>Leave everything else as default and click <strong>Create repository</strong></li>
+    </ol>
+    <div class="tip">
+      ⚠️ The repository name must match your username exactly. If your username is <code>jsmith</code>, the repo must be named <code>jsmith.github.io</code>
+    </div>
+  </div>
+
+  <div class="step-block">
+    <div class="step-num">Step 3</div>
+    <h3>Unzip and upload your files</h3>
+    <ol>
+      <li>Unzip the <code>kogiopoulos-media.zip</code> file on your computer</li>
+      <li>On your new GitHub repository page, click <strong>uploading an existing file</strong> (or drag files in)</li>
+      <li>Select <strong>all files</strong> inside the unzipped folder and drag them into the GitHub upload area</li>
+      <li>Wait for all files to upload — this may take a minute due to the photo file sizes</li>
+      <li>Scroll down, add a commit message like <code>Initial site upload</code>, and click <strong>Commit changes</strong></li>
+    </ol>
+    <div class="tip">
+      📁 Make sure you upload the <em>contents</em> of the folder, not the folder itself. GitHub should show all HTML files and JPG images at the root level — not inside a subfolder.
+    </div>
+  </div>
+
+  <div class="step-block">
+    <div class="step-num">Step 4</div>
+    <h3>Enable GitHub Pages</h3>
+    <ol>
+      <li>In your repository, click <strong>Settings</strong> (top menu bar)</li>
+      <li>In the left sidebar, click <strong>Pages</strong></li>
+      <li>Under <strong>Branch</strong>, select <code>main</code> from the dropdown</li>
+      <li>Leave the folder as <code>/ (root)</code></li>
+      <li>Click <strong>Save</strong></li>
+    </ol>
+  </div>
+
+  <div class="step-block">
+    <div class="step-num">Step 5</div>
+    <h3>Visit your live site</h3>
+    <p>After a minute or two, your site will be live at:</p>
+    <div class="url-example">https://YOUR-USERNAME.github.io</div>
+    <p>GitHub Pages can take 2–5 minutes to deploy after saving. Refresh the Settings → Pages screen until you see a green "Your site is live" message with the URL.</p>
+  </div>
+
+  <hr>
+
+  <h2>Using a custom domain (optional)</h2>
+  <p>If you own a domain like <code>kogiopoulosmedia.com</code>, you can point it to your GitHub Pages site for free.</p>
+  <ol>
+    <li>In Settings → Pages, enter your domain name in the <strong>Custom domain</strong> field and click Save</li>
+    <li>Log into your domain registrar (e.g. GoDaddy, Namecheap, Squarespace Domains)</li>
+    <li>Add the following <strong>A records</strong> pointing to GitHub's servers:</li>
+  </ol>
+  <div class="file-tree">
+    185.199.108.153<br>
+    185.199.109.153<br>
+    185.199.110.153<br>
+    185.199.111.153
+  </div>
+  <ol start="4">
+    <li>Also add a <strong>CNAME record</strong>: <code>www</code> → <code>YOUR-USERNAME.github.io</code></li>
+    <li>DNS changes can take up to 48 hours to propagate</li>
+    <li>Once live, tick <strong>Enforce HTTPS</strong> in GitHub Pages settings</li>
+  </ol>
+
+  <hr>
+
+  <h2>Updating your site in the future</h2>
+  <p>To update content, simply go to your repository on GitHub, click the file you want to edit or upload a new version, and commit the change. The site will update within a minute or two.</p>
+  <p>To add new photos to the portfolio, upload the JPG files to the repository and update the relevant HTML file to reference them.</p>
+
+  <hr>
+
+  <h2>Need help?</h2>
+  <p>GitHub has excellent documentation at <a href="https://docs.github.com/en/pages" target="_blank">docs.github.com/en/pages</a>. If something isn't working, the most common fix is to double-check that all files are at the root level of the repository (not inside a subfolder).</p>
+
+</body>
+</html>

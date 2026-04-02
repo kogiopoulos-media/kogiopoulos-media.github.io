@@ -105,6 +105,10 @@
     .form-textarea { resize: none; height: 120px; }
     .form-submit { background: transparent; border: 1px solid var(--gold); color: var(--gold); font-family: 'Jost', sans-serif; font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; padding: 1.2rem 3rem; cursor: none; transition: background 0.3s, color 0.3s; }
     .form-submit:hover { background: var(--gold); color: var(--black); }
+    .form-submit:disabled { opacity: 0.5; pointer-events: none; }
+    .form-message { margin-top: 1.5rem; font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; display: none; }
+    .form-message.success { color: #6fcf97; display: block; }
+    .form-message.error { color: #eb5757; display: block; }
     footer { background: var(--black); padding: 3rem 4rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(201,168,76,0.08); }
     .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; letter-spacing: 0.15em; color: var(--cream); }
     .footer-copy { font-size: 0.65rem; letter-spacing: 0.15em; color: var(--muted); }
@@ -197,90 +201,23 @@
   <section class="contact" id="contact">
     <div class="reveal">
       <p class="section-label">Get in Touch</p>
-      <h2 class="section-title">Let's create<br>something<br>
-        <em style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold-light)">unforgettable.</em>
-      </h2>
-      <p class="contact-intro">
-        Ready to work together? We'd love to hear about your project. Reach out and we'll respond within 24 hours.
-      </p>
-
+      <h2 class="section-title">Let's create<br>something<br><em style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold-light)">unforgettable.</em></h2>
+      <p class="contact-intro">Ready to work together? We'd love to hear about your project. Reach out and we'll respond within 24 hours.</p>
       <div class="contact-detail">
-        <div class="contact-item">
-          <span class="contact-item-label">Email</span>
-          <span class="contact-item-val">hello@kogiopoulosmedia.com</span>
-        </div>
-        <div class="contact-item">
-          <span class="contact-item-label">Based in</span>
-          <span class="contact-item-val">Perth, Western Australia</span>
-        </div>
-        <div class="contact-item">
-          <span class="contact-item-label">Instagram</span>
-          <span class="contact-item-val">@kogiopoulosmedia</span>
-        </div>
+        <div class="contact-item"><span class="contact-item-label">Email</span><span class="contact-item-val">hello@kogiopoulosmedia.com</span></div>
+        <div class="contact-item"><span class="contact-item-label">Based in</span><span class="contact-item-val">Perth, Western Australia</span></div>
+        <div class="contact-item"><span class="contact-item-label">Instagram</span><span class="contact-item-val">@kogiopoulosmedia</span></div>
       </div>
     </div>
-
-    <!-- FORM -->
-    <form id="contact-form" class="reveal">
-      <div class="form-group">
-        <label class="form-label">Your Name</label>
-        <input type="text" id="name" class="form-input" placeholder="Jane Smith" required>
-      </div>
-
-      <div class="form-group">
-        <label class="form-label">Email Address</label>
-        <input type="email" id="email" class="form-input" placeholder="jane@email.com" required>
-      </div>
-
-      <div class="form-group">
-        <label class="form-label">Project Type</label>
-        <input type="text" id="project" class="form-input" placeholder="Event / Portrait / Commercial..." required>
-      </div>
-
-      <div class="form-group">
-        <label class="form-label">Tell us about your vision</label>
-        <textarea id="message" class="form-textarea" placeholder="Share the story you want to tell..." required></textarea>
-      </div>
-
-      <button type="submit" class="form-submit">Send Enquiry</button>
-    </form>
+    <div class="reveal">
+      <div class="form-group"><label class="form-label">Your Name</label><input type="text" id="from_name" name="from_name" class="form-input" placeholder="Jane Smith" required/></div>
+      <div class="form-group"><label class="form-label">Email Address</label><input type="email" id="reply_to" name="reply_to" class="form-input" placeholder="jane@email.com" required/></div>
+      <div class="form-group"><label class="form-label">Project Type</label><input type="text" id="project_type" name="project_type" class="form-input" placeholder="Event / Portrait / Commercial..."/></div>
+      <div class="form-group"><label class="form-label">Tell us about your vision</label><textarea id="message" name="message" class="form-textarea" placeholder="Share the story you want to tell..."></textarea></div>
+      <button class="form-submit" id="submitBtn" onclick="sendEmail()">Send Enquiry</button>
+      <p class="form-message" id="formMessage"></p>
+    </div>
   </section>
-
-  <!-- EMAILJS -->
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-
-  <script>
-  (function() {
-    emailjs.init("1VapVgh1YuLior9Mg"); // replace
-  })();
-
-  document.getElementById("contact-form").addEventListener("submit", function(e) {
-    e.preventDefault();
-
-    const button = document.querySelector(".form-submit");
-    button.innerText = "Sending...";
-    button.disabled = true;
-
-    emailjs.send("service_xf9c9b6", "template_xqyzb2f", {
-      name: document.getElementById("name").value,
-      email: document.getElementById("email").value,
-      project: document.getElementById("project").value,
-      message: document.getElementById("message").value
-    })
-    .then(function() {
-      alert("Enquiry sent successfully!");
-      document.getElementById("contact-form").reset();
-      button.innerText = "Send Enquiry";
-      button.disabled = false;
-    })
-    .catch(function(error) {
-      alert("Failed to send enquiry.");
-      console.error(error);
-      button.innerText = "Send Enquiry";
-      button.disabled = false;
-    });
-  });
-  </script>
 
   <footer>
     <div class="footer-logo">KOGIOPOULOS MEDIA</div>
@@ -288,7 +225,53 @@
     <div class="footer-social"><a href="#">Instagram</a><a href="#">LinkedIn</a><a href="#">Behance</a></div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script>
+    // EmailJS
+    emailjs.init('1VapVgh1YuLior9Mg');
+
+    function sendEmail() {
+      const btn = document.getElementById('submitBtn');
+      const msg = document.getElementById('formMessage');
+      const name = document.getElementById('from_name').value.trim();
+      const email = document.getElementById('reply_to').value.trim();
+
+      if (!name || !email) {
+        msg.textContent = 'Please fill in your name and email.';
+        msg.className = 'form-message error';
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+      msg.className = 'form-message';
+
+      const params = {
+        from_name:    name,
+        reply_to:     email,
+        project_type: document.getElementById('project_type').value.trim() || 'Not specified',
+        message:      document.getElementById('message').value.trim() || 'No message provided',
+      };
+
+      emailjs.send('service_xf9c9b6', 'template_xqyzb2f', params)
+        .then(() => {
+          msg.textContent = '✓ Message sent — we\'ll be in touch within 24 hours.';
+          msg.className = 'form-message success';
+          btn.textContent = 'Sent';
+          document.getElementById('from_name').value = '';
+          document.getElementById('reply_to').value = '';
+          document.getElementById('project_type').value = '';
+          document.getElementById('message').value = '';
+        })
+        .catch((err) => {
+          console.error('EmailJS error:', err);
+          msg.textContent = '✗ Something went wrong. Please try emailing us directly.';
+          msg.className = 'form-message error';
+          btn.disabled = false;
+          btn.textContent = 'Send Enquiry';
+        });
+    }
+
     const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
     let mx=0,my=0,rx=0,ry=0;
     document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});

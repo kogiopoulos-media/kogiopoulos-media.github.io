@@ -14,7 +14,7 @@
     html { scroll-behavior: smooth; }
     body { background: var(--black); color: var(--cream); font-family: 'Jost', sans-serif; font-weight: 300; overflow-x: hidden; cursor: none; }
     .cursor { position: fixed; width: 8px; height: 8px; background: var(--gold); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); }
-    .cursor-ring { position: fixed; width: 36px; height: 36px; border: 1px solid rgba(201,168,76,0.5); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: all 0.15s ease; }
+    
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 2rem 4rem; transition: background 0.4s; }
     .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 300; letter-spacing: 0.2em; color: var(--cream); text-decoration: none; }
     .nav-logo span { color: var(--gold); }
@@ -73,12 +73,12 @@
     .lightbox-caption { position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%); font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
     .lightbox-counter { position: absolute; top: 2rem; left: 50%; transform: translateX(-50%); font-size: 0.65rem; letter-spacing: 0.2em; color: var(--muted); }
     .about { background: var(--warm-dark); display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
-    .about-image-wrap { position: relative; }
-    .about-image { width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block; }
-    .about-image-accent { position: absolute; bottom: -2rem; right: -2rem; width: 60%; aspect-ratio: 1; border: 1px solid var(--gold); opacity: 0.3; pointer-events: none; }
-    .about-stat-row { display: flex; gap: 3rem; margin-top: 3rem; padding-top: 3rem; border-top: 1px solid rgba(201,168,76,0.15); }
-    .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300; color: var(--gold); line-height: 1; }
-    .stat-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-top: 0.4rem; }
+    .about-image-wrap { position: relative; overflow: visible; }
+    .about-image { width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block; position: relative; z-index: 1; }
+    .about-image-accent { position: absolute; bottom: -1.5rem; right: -1.5rem; width: 55%; aspect-ratio: 1; border: 1px solid var(--gold); opacity: 0.4; pointer-events: none; z-index: 0; } .about-image { position: relative; z-index: 1; }
+    
+    
+    
     .about-text { font-size: 1rem; line-height: 1.9; color: rgba(245,240,232,0.7); margin-bottom: 1.5rem; }
     .services { background: var(--charcoal); }
     .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; margin-top: 4rem; }
@@ -128,7 +128,7 @@
 </head>
 <body>
   <div class="cursor" id="cursor"></div>
-  <div class="cursor-ring" id="cursorRing"></div>
+  
   <nav id="navbar">
     <a href="index.html" class="nav-logo">K<span>·</span>MEDIA</a>
     <ul class="nav-links">
@@ -181,11 +181,6 @@
       <h2 class="section-title">Light, shadow,<br>and <em style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold-light)">intention.</em></h2>
       <p class="about-text">Kogiopoulos Media is a visual storytelling studio built on the belief that great photography isn't taken — it's crafted. From commercial campaigns to live events, every image is approached with care, precision, and an eye for the extraordinary in the everyday.</p>
       <p class="about-text">Based in Perth, Australia, we work with brands and creatives who understand the power of a compelling image.</p>
-      <div class="about-stat-row">
-        <div><div class="stat-num">3+</div><div class="stat-label">Years of craft</div></div>
-        <div><div class="stat-num">100+</div><div class="stat-label">Projects delivered</div></div>
-        <div><div class="stat-num">3</div><div class="stat-label">Continents covered</div></div>
-      </div>
     </div>
   </section>
 
@@ -272,14 +267,7 @@
         });
     }
 
-    const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
-    let mx=0,my=0,rx=0,ry=0;
-    document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
-    (function a(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(a);})();
-    document.querySelectorAll('a,button,.p-item,.lightbox-nav,.lightbox-close').forEach(el=>{
-      el.addEventListener('mouseenter',()=>{ring.style.transform='translate(-50%,-50%) scale(1.8)';ring.style.borderColor='rgba(201,168,76,0.8)';});
-      el.addEventListener('mouseleave',()=>{ring.style.transform='translate(-50%,-50%) scale(1)';ring.style.borderColor='rgba(201,168,76,0.5)';});
-    });
+    
     window.addEventListener('scroll',()=>{document.getElementById('navbar').style.background=window.scrollY>80?'rgba(10,10,10,0.97)':'linear-gradient(to bottom,rgba(10,10,10,0.95),transparent)';});
     const io=new IntersectionObserver((e)=>{e.forEach((r,i)=>{if(r.isIntersecting){setTimeout(()=>r.target.classList.add('visible'),i*80);}});},{threshold:0.1});
     document.querySelectorAll('.reveal').forEach(r=>io.observe(r));
